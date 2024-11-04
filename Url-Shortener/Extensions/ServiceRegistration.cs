@@ -1,9 +1,9 @@
-﻿using Url_Shortener.Data.Abstractions;
-using Url_Shortener.Data.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
 using Url_Shortener.Data;
-using Url_Shortener.Services.Abstractions;
+using Url_Shortener.Data.Abstractions;
+using Url_Shortener.Data.Repositories;
 using Url_Shortener.Services;
-using Microsoft.EntityFrameworkCore;
+using Url_Shortener.Services.Abstractions;
 
 namespace Url_Shortener.Extensions;
 
@@ -21,6 +21,8 @@ public static class ServiceRegistration
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+        services.AddDbContext<AppDbContext>(options =>
+            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IUrlService, UrlService>();
