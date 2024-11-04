@@ -18,15 +18,18 @@ public static class ServiceRegistration
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
-        var postgresConnection = Environment.GetEnvironmentVariable("PostgresConnection");
-
-        if (string.IsNullOrEmpty(postgresConnection))
+        var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+        Console.WriteLine(env);
+        if (env == "Production")
         {
-            throw new InvalidOperationException("PostgresConnection secret is not set.");
+            var postgresConnection = Environment.GetEnvironmentVariable("PostgresConnection");
+            if (string.IsNullOrEmpty(postgresConnection))
+            {
+                throw new InvalidOperationException("PostgresConnection secret is not set.");
+            }
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseNpgsql(postgresConnection));
         }
-
-        services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(postgresConnection));
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IUrlService, UrlService>();
