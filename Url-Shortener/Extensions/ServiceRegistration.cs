@@ -30,6 +30,11 @@ public static class ServiceRegistration
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(postgresConnection));
         }
+        else
+        {
+            services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer("SqlServerConnection"));
+        }
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IUrlService, UrlService>();
