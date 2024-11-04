@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Url_Shortener.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,10 +15,11 @@ namespace Url_Shortener.Migrations
                 name: "Links",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    OriginalUrl = table.Column<string>(nullable: false),
-                    ShortUrl = table.Column<string>(nullable: false),
-                    ShortUrlId = table.Column<string>(nullable: false)
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    OriginalUrl = table.Column<string>(type: "text", nullable: false),
+                    ShortUrl = table.Column<string>(type: "text", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ShortUrlId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
