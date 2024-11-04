@@ -38,8 +38,11 @@ public static class ServiceRegistration
         //services.AddDbContext<AppDbContext>(options =>
         //    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+        //services.AddDbContext<AppDbContext>(options =>
+        //    options.UseNpgsql(configuration.GetConnectionString("PostgresConnection")));
+
         services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("PostgresConnection")));
+            options.UseNpgsql(configuration.GetConnectionString(Environment.GetEnvironmentVariable("PostgresConnection"))));
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IUrlService, UrlService>();
