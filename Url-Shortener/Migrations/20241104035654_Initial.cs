@@ -14,10 +14,10 @@ namespace Url_Shortener.Migrations
                 name: "Links",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OriginalUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShortUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShortUrlId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<string>(nullable: false),
+                    OriginalUrl = table.Column<string>(nullable: false),
+                    ShortUrl = table.Column<string>(nullable: false),
+                    ShortUrlId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
