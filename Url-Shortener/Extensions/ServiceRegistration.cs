@@ -18,31 +18,8 @@ public static class ServiceRegistration
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
-        // Determine the database to use based on the environment
-        //var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-
-        //if (env == "Production")
-        //{
-        //    // Use PostgreSQL in production
-        //    services.AddDbContext<AppDbContext>(options =>
-        //        options.UseNpgsql(configuration.GetConnectionString("PostgresConnection")));
-        //}
-        //else
-        //{
-        //    // Use SQL Server in development
-        //    services.AddDbContext<AppDbContext>(options =>
-        //        options.UseSqlServer(configuration.GetConnectionString("SqlServerConnection")));
-        //}
-
-
-        //services.AddDbContext<AppDbContext>(options =>
-        //    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-
         services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("PostgresConnection")));
-
-        //services.AddDbContext<AppDbContext>(options =>
-        //    options.UseNpgsql(configuration.GetConnectionString(Environment.GetEnvironmentVariable("PostgresConnection"))));
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IUrlService, UrlService>();
