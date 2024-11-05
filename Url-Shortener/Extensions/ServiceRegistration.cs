@@ -31,6 +31,9 @@ public static class ServiceRegistration
             throw new InvalidOperationException("DefaultConnection secret is not set.");
         }
 
+        services.AddDbContext<AppDbContext>(options =>
+            options.UseNpgsql(postgresConnection));
+
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IUrlService, UrlService>();
 
