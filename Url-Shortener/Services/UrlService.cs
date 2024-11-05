@@ -7,9 +7,12 @@ using Url_Shortener.Services.Abstractions;
 
 namespace Url_Shortener.Services;
 
-public class UrlService(IRepository<Link> linkRepository) : IUrlService
+public class UrlService(
+    IConfiguration configuration,
+    IRepository<Link> linkRepository) : IUrlService
 {
     private readonly IRepository<Link> _linkRepository = linkRepository;
+    private readonly string UrlShortenerServiceBaseUrl = configuration.GetValue<string>("UrlShortenerServiceBaseUrl");
 
     public async Task<Result> CreateShortUrl(CreateShortUrlDto shortUrlRequest)
     {
@@ -20,7 +23,7 @@ public class UrlService(IRepository<Link> linkRepository) : IUrlService
 
         var link = new Link(
             shortUrlRequest.Url,
-            "OG/" + shortUrlId,
+            UrlShortenerServiceBaseUrl + "/" + shortUrlId,
             shortUrlId);
 
         var linkDto = new LinkDto(link.ShortUrl);
