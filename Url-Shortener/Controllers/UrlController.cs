@@ -26,7 +26,7 @@ public class UrlController(IUrlService urlService) : ControllerBase
         return BadRequest();
     }
 
-    [HttpGet("/{id}")]
+    [HttpGet("GoToOriginalUrl/{id}")]
     public async Task<IActionResult> GoToOriginalUrl([FromRoute] string id)
     {
         var result = await _urlService.GoToOriginalUrl(id);
