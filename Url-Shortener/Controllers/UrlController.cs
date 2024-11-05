@@ -34,8 +34,6 @@ public class UrlController(IUrlService urlService) : ControllerBase
         if (result.IsFailure) return BadRequest(
             ResponseDto<object>.Failure(result.Errors!));
 
-        var baseUrl = "";
-
         if (result is Result<string> success) return Ok(
             ResponseDto<string>.Success(data: success.Data));
 

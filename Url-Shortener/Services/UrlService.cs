@@ -12,7 +12,7 @@ public class UrlService(
     IRepository<Link> linkRepository) : IUrlService
 {
     private readonly IRepository<Link> _linkRepository = linkRepository;
-    private readonly string UrlShortenerServiceBaseUrl = configuration.GetValue<string>("UrlShortenerServiceBaseUrl");
+    private readonly string _UrlShortenerServiceBaseUrl = configuration.GetValue<string>("_UrlShortenerServiceBaseUrl");
 
     public async Task<Result> CreateShortUrl(CreateShortUrlDto shortUrlRequest)
     {
@@ -23,7 +23,7 @@ public class UrlService(
 
         var link = new Link(
             shortUrlRequest.Url,
-            UrlShortenerServiceBaseUrl + "/" + shortUrlId,
+            _UrlShortenerServiceBaseUrl + "/" + shortUrlId,
             shortUrlId);
 
         var linkDto = new LinkDto(link.ShortUrl);
