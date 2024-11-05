@@ -12,8 +12,8 @@ using Url_Shortener.Data;
 namespace Url_Shortener.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241104100830_initial")]
-    partial class initial
+    [Migration("20241105012252_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,7 +30,7 @@ namespace Url_Shortener.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("DateCreated")
+                    b.Property<DateTimeOffset>("DateCreated")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("OriginalUrl")

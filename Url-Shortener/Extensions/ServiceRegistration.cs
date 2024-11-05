@@ -22,10 +22,12 @@ public static class ServiceRegistration
         Console.WriteLine(env);
         if (env == "Production")
         {
-            var postgresConnection = Environment.GetEnvironmentVariable("PostgresConnection");
+            var postgresConnection = Environment.GetEnvironmentVariable("DefaultConnection")
+                   ?? configuration.GetConnectionString("DefaultConnection");
+
             if (string.IsNullOrEmpty(postgresConnection))
             {
-                throw new InvalidOperationException("PostgresConnection secret is not set.");
+                throw new InvalidOperationException("DefaultConnection secret is not set.");
             }
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(postgresConnection));
@@ -33,7 +35,7 @@ public static class ServiceRegistration
         else
         {
             services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer("SqlServerConnection"));
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
         }
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
