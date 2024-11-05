@@ -13,24 +13,24 @@ public class UrlService(
 {
     private readonly IRepository<Link> _linkRepository = linkRepository;
 
-    public async Task<Result> CreateShortUrl(CreateShortUrlDto shortUrlRequest)
+    public async Task<Result> CreateShortUrl(string url)
     {
-        if (!IsValidUrl(shortUrlRequest.Url))
+        if (!IsValidUrl(url))
             return new Error[] { new("Url.Error", "Invalid URL format.") };
 
         var shortUrlId = await GenerateUniqueShortUrlId();
 
         var link = new Link(
-            shortUrlRequest.Url,
+            url,
             shortUrlId,
             shortUrlId);
 
-        var linkDto = new LinkDto(link.ShortUrl);
+        var shortUrl = link.ShortUrl;
 
         await _linkRepository.AddAsync(link);
         await _linkRepository.SaveChangesAsync();
 
-        return Result<LinkDto>.Success(linkDto);
+        return Result<string>.Success(shortUrl);
     }
 
     private bool IsValidUrl(string url)
