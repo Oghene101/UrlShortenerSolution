@@ -12,10 +12,10 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["UrlShortener/UrlShortener.csproj", "UrlShortener/"]
-RUN dotnet restore "./UrlShortener/UrlShortener.csproj"
+COPY ["Url-Shortener/UrlShortener.csproj", "Url-Shortener/"]
+RUN dotnet restore "./Url-Shortener/UrlShortener.csproj"
 COPY . .
-WORKDIR "/src/UrlShortener"
+WORKDIR "/src/Url-Shortener"
 RUN dotnet build "./UrlShortener.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
