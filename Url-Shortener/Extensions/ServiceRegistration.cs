@@ -18,27 +18,41 @@ public static class ServiceRegistration
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
+
         var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         Console.WriteLine(env);
-        if (env == "Production")
-        {
-            var postgresConnection = Environment.GetEnvironmentVariable("DefaultConnection")
-                   ?? configuration.GetConnectionString("DefaultConnection");
 
-            if (string.IsNullOrEmpty(postgresConnection))
-            {
-                throw new InvalidOperationException("DefaultConnection secret is not set.");
-            }
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(postgresConnection));
-        }
-        else
+        string postgresConnection = (env == "Production")
+            ? Environment.GetEnvironmentVariable("DefaultConnection") ?? configuration.GetConnectionString("DefaultConnection")!
+            : configuration.GetConnectionString("DefaultConnection")!;
+
+        if (string.IsNullOrEmpty(postgresConnection))
         {
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+            throw new InvalidOperationException("DefaultConnection secret is not set.");
         }
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IUrlService, UrlService>();
+
+        // Check for pending migrations
+        using var context = services.BuildServiceProvider().GetRequiredService<AppDbContext>();
+        var pendingMigrations = context.Database.GetPendingMigrations();
+
+        if (pendingMigrations.Any())
+        {
+            try
+            {
+                Console.WriteLine("Applying migrations...");
+                context.Database.Migrate();
+                Console.WriteLine("Migrations applied successfully.");
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while applying migrations: {ex.Message}");
+                throw;
+            }
+        }
+        else Console.WriteLine("No pending migrations.");
     }
 }
