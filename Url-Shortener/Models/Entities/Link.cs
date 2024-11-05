@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Url_Shortener.Models.Entities;
+namespace UrlShortener.Models.Entities;
 
 public class Link(string originalUrl, string shortUrl, string shortUrlId)
 {

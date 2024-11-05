@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using Url_Shortener.Data.Abstractions;
+using UrlShortener.Data.Abstractions;
 
-namespace Url_Shortener.Data.Repositories;
+namespace UrlShortener.Data.Repositories;
 
 public class Repository<T>(AppDbContext dbContext) : IRepository<T> where T : class
 {

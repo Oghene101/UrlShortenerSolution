@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Url_Shortener.Data;
+using UrlShortener.Data;
 
 #nullable disable
 
-namespace Url_Shortener.Migrations
+namespace UrlShortener.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20241105012252_Initial")]
@@ -25,7 +25,7 @@ namespace Url_Shortener.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Url_Shortener.Models.Entities.Link", b =>
+            modelBuilder.Entity("UrlShortener.Models.Entities.Link", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");

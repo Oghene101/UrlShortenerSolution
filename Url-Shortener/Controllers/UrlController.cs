@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Url_Shortener.Models.Dtos;
-using Url_Shortener.Services.Abstractions;
+using UrlShortener.Models.Dtos;
+using UrlShortener.Services.Abstractions;
 
-namespace Url_Shortener.Controllers;
+namespace UrlShortener.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

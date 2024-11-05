@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Url_Shortener.Data;
-using Url_Shortener.Data.Abstractions;
-using Url_Shortener.Data.Repositories;
-using Url_Shortener.Services;
-using Url_Shortener.Services.Abstractions;
+using UrlShortener.Data;
+using UrlShortener.Data.Abstractions;
+using UrlShortener.Data.Repositories;
+using UrlShortener.Services;
+using UrlShortener.Services.Abstractions;
 
-namespace Url_Shortener.Extensions;
+namespace UrlShortener.Extensions;
 
 public static class ServiceRegistration
 {

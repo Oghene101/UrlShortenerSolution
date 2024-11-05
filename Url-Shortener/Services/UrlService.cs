@@ -1,11 +1,11 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using Url_Shortener.Data.Abstractions;
-using Url_Shortener.Models.Dtos;
-using Url_Shortener.Models.Entities;
-using Url_Shortener.Services.Abstractions;
+using UrlShortener.Data.Abstractions;
+using UrlShortener.Models.Dtos;
+using UrlShortener.Models.Entities;
+using UrlShortener.Services.Abstractions;
 
-namespace Url_Shortener.Services;
+namespace UrlShortener.Services;
 
 public class UrlService(
     IConfiguration configuration,

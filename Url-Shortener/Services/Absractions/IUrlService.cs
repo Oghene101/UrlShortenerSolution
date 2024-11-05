@@ -1,6 +1,6 @@
-﻿using Url_Shortener.Models.Dtos;
+﻿using UrlShortener.Models.Dtos;
 
-namespace Url_Shortener.Services.Abstractions;
+namespace UrlShortener.Services.Abstractions;
 
 public interface IUrlService
 {

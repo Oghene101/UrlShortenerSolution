@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Url_Shortener.Models.Entities;
+using UrlShortener.Models.Entities;
 
-namespace Url_Shortener.Data;
+namespace UrlShortener.Data;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {

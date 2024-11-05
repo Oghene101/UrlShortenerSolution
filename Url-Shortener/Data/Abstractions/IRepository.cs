@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Url_Shortener.Data.Abstractions;
+namespace UrlShortener.Data.Abstractions;
 
 public interface IRepository<T>
 {

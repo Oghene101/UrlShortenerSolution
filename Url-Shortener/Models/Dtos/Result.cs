@@ -1,7 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.Net;
 
-namespace Url_Shortener.Models.Dtos;
+namespace UrlShortener.Models.Dtos;
 
 public class Result
 {

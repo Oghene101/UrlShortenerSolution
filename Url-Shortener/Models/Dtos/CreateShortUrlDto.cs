@@ -1,1 +1,1 @@
-﻿namespace Url_Shortener.Models.Dtos;
+﻿namespace UrlShortener.Models.Dtos;
